@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Luyện Phát Âm - Vũ Hạnh</title>
+</head>
+<body style="font-family: Arial, sans-serif; background: #f0f8ff; padding: 40px;">
+    <h1 style="color: #003366;">🎧 Web Luyện Phát Âm Tiếng Anh</h1>
+    <p>Trang web này giúp bạn luyện phát âm tiếng Anh chuẩn giọng bản ngữ. Nhấn vào nút 🔊 để nghe phát âm.</p>
+
+    <h2>📘 Từ vựng ví dụ</h2>
+    <ul>
+        <li><strong>Apple</strong> <button onclick="speak('apple')">🔊 Nghe</button></li>
+        <li><strong>Banana</strong> <button onclick="speak('banana')">🔊 Nghe</button></li>
+        <li><strong>Cat</strong> <button onclick="speak('cat')">🔊 Nghe</button></li>
+        <li><strong>Dog</strong> <button onclick="speak('dog')">🔊 Nghe</button></li>
+        <li><strong>Elephant</strong> <button onclick="speak('elephant')">🔊 Nghe</button></li>
+    </ul>
+
+    <h2>🔍 Nhập từ bạn muốn nghe:</h2>
+    <input type="text" id="wordInput" placeholder="Nhập từ tiếng Anh..." style="padding: 8px; width: 200px;">
+    <button onclick="speakInput()">🔊 Phát âm</button>
+
+    <script>
+        function speak(word) {
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = 'en-US';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakInput() {
+            const word = document.getElementById("wordInput").value;
+            speak(word);
+        }
+    </script>
+
+    <hr>
+    <p>🔒 Web lập trình bởi <strong>Vũ Hạnh</strong> – Zalo: 0326 955 926</p>
+</body>
+</html>
