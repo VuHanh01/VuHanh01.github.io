@@ -1,12 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Web Luyện Phát Âm - Vũ Hạnh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            padding: 40px;
+        }
+        h1 {
+            color: #003366;
+        }
+        .word {
+            margin: 10px 0;
+        }
+        button {
+            margin-left: 10px;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background: #f0f8ff; padding: 40px;">
-    <h1 style="color: #003366;">🎧 Web Luyện Phát Âm Tiếng Anh</h1>
+<body>
+    <h1>🎧 Web Luyện Phát Âm Tiếng Anh</h1>
     <p>Trang web này giúp bạn luyện phát âm tiếng Anh chuẩn giọng bản ngữ. Nhấn vào nút 🔊 để nghe phát âm.</p>
 
     <h2>📘 Từ vựng ví dụ</h2>
@@ -22,6 +37,10 @@
     <input type="text" id="wordInput" placeholder="Nhập từ tiếng Anh..." style="padding: 8px; width: 200px;">
     <button onclick="speakInput()">🔊 Phát âm</button>
 
+    <hr>
+    <h2>🧠 Danh sách từ luyện phát âm từ link:</h2>
+    <div id="wordListFromURL"><i>⏳ Nếu bạn dùng link có dạng <code>?words=cat,hat,bag</code>, danh sách từ sẽ hiển thị ở đây.</i></div>
+
     <script>
         function speak(word) {
             const utterance = new SpeechSynthesisUtterance(word);
@@ -32,6 +51,22 @@
         function speakInput() {
             const word = document.getElementById("wordInput").value;
             speak(word);
+        }
+
+        // 🧠 Tự động đọc ?words=cat,hat,dog
+        const params = new URLSearchParams(window.location.search);
+        const words = params.get('words');
+        const listDiv = document.getElementById('wordListFromURL');
+
+        if (words) {
+            const wordArray = words.split(',').map(w => w.trim());
+            listDiv.innerHTML = ''; // clear loading
+            wordArray.forEach(word => {
+                const div = document.createElement('div');
+                div.className = 'word';
+                div.innerHTML = `<strong>${word}</strong> <button onclick="speak('${word}')">🔊 Nghe</button>`;
+                listDiv.appendChild(div);
+            });
         }
     </script>
 
